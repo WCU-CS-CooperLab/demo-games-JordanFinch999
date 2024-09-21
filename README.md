@@ -10,3 +10,10 @@ Updated Coin Dash Link - https://wcu-cs-cooperlab.github.io/demo-games-JordanFin
 Base Game Ver 1.0 Coin Dash - https://wcu-cs-cooperlab.github.io/demo-games-JordanFinch999/coindash2/index.html
 
 Ver 1.1 Coin Dash - https://wcu-cs-cooperlab.github.io/demo-games-JordanFinch999/CoinDash2.1/index.html
+
+
+# Project 1
+
+Phase 1 - https://wcu-cs-cooperlab.github.io/demo-games-JordanFinch999/CoinDash2.1/index.html
+
+Phase 2 - 
