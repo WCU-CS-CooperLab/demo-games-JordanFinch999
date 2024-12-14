@@ -51,7 +51,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"coin",
-"speed": 5.0
+"speed": 12.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mhdno"]
@@ -70,3 +70,8 @@ metadata/_edit_group_ = true
 scale = Vector2(2.01967, 1.99097)
 shape = SubResource("CircleShape2D_mhdno")
 metadata/_edit_group_ = true
+
+[node name="CoinTimer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="CoinTimer" to="." method="_on_coin_timer_timeout"]

@@ -23,5 +23,4 @@ func show_game_over():
 	await $Timer.timeout
 	$StartButton.show()
 	$Message.text = "Coin Dash!"
-	$Message.show()
 	

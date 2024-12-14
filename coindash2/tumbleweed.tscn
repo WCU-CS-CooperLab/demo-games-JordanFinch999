@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dw5tm5qtfbl33"]
+
+[ext_resource type="Script" path="res://tumbleweed.gd" id="1_in2ky"]
+[ext_resource type="Texture2D" uid="uid://bs3fdc3layhl7" path="res://assets/round-tumbleweed-flat-cartoon-style-design-on-white-background-vector_processed.png" id="2_5ismk"]
+[ext_resource type="PackedScene" uid="uid://fg161bqroowo" path="res://enemy_paths.tscn" id="3_lxlq6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_shhgy"]
+
+[node name="Tumbleweed" type="Area2D" groups=["enemies"]]
+scale = Vector2(0.4, 0.4)
+script = ExtResource("1_in2ky")
+metadata/_edit_vertical_guides_ = [2.0]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.283266, 0.283266)
+texture = ExtResource("2_5ismk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2.95161, 2.95161)
+shape = SubResource("CircleShape2D_shhgy")
+
+[node name="EnemyPaths" parent="." instance=ExtResource("3_lxlq6")]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

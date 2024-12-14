@@ -34,7 +34,16 @@ func die():
 func _on_area_entered(area):
 	if area.is_in_group("coins"):
 		area.pickup()
-		pickup.emit()
+		pickup.emit("coin")
+	if area.is_in_group("powerups"):
+		area.pickup()
+		pickup.emit("powerup")
 	if area.is_in_group("obstacles"):
 		hurt.emit()
 		die()
+	if area.is_in_group("enemies"):
+		hurt.emit()
+		die()
+	if area.is_in_group("debuff"):
+		area.pickup()
+		pickup.emit("debuff")
