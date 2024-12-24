@@ -15,14 +15,20 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -11.5
-offset_bottom = 11.5
+offset_top = -305.0
+offset_bottom = 359.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Use the Arrow 
-Keys To Move
+text = "Use the Arrow Keys to move.
 
-Press Space To Continue"
+Collect Water Drops to increase your score.
+
+Steer clear of Cacti and Tumbleweeds!
+
+Green Clock: Increases your time.
+Red Clock: Decreases your time—watch out!
+
+Press Spacebar to begin."
 label_settings = SubResource("LabelSettings_4mkb0")
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -7,7 +7,6 @@ func update_timer(value):
 func show_message(text):
 	$Message.text = text
 	$Message.show()
-	$Timer.start()
 	
 
 func _on_timer_timeout():
@@ -17,10 +16,11 @@ func _on_start_button_pressed():
 	$StartButton.hide()
 	$Message.hide()
 	start_game.emit()
+	$Controls/Information.show()
 	
 func show_game_over():
 	show_message("Game Over")
-	await $Timer.timeout
-	$StartButton.show()
-	$Message.text = "Coin Dash!"
 	
+func _process(delta):
+	if Input.is_action_pressed("Continue"):
+		$Controls/Information.hide()

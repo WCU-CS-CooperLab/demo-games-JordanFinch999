@@ -8,17 +8,8 @@ func pickup():
 	await tw.finished
 	queue_free()
 
-func _ready():
-	$PowerupTimer.start(randf_range(1, 2))
-
 func _on_lifetime_timeout():
 	queue_free()
-
-
-func _on_powerup_timer_timeout():
-	$AnimatedSprite2D.frame = 0
-	$AnimatedSprite2D.play()
-
 
 func _on_area_entered(area: Area2D):
 	if area.is_in_group("obstacles"):

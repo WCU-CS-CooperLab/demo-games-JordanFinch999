@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbjn8ytdjrwy1"]
+[gd_scene load_steps=5 format=3 uid="uid://bbjn8ytdjrwy1"]
 
 [ext_resource type="Script" path="res://hud.gd" id="1_ldolr"]
 [ext_resource type="FontFile" uid="uid://bh61ehiw3h71h" path="res://assets/Kenney Bold.ttf" id="2_cw71g"]
+[ext_resource type="PackedScene" uid="uid://ce80f52fftlmj" path="res://controls.tscn" id="3_p7hnw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ekh12"]
 font = ExtResource("2_cw71g")
@@ -22,7 +23,7 @@ offset_top = -11.5
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "Coin Dash!"
+text = "Thirst!"
 label_settings = SubResource("LabelSettings_ekh12")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -68,6 +69,9 @@ grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_cw71g")
 theme_override_font_sizes/font_size = 48
 text = "Start"
+
+[node name="Controls" parent="." instance=ExtResource("3_p7hnw")]
+visible = false
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

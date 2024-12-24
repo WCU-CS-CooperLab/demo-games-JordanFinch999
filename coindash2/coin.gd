@@ -8,13 +8,6 @@ func pickup():
 	await tw.finished
 	queue_free()
 
-func _ready():
-	$CoinTimer.start(randf_range(1, 5))
-
-func _on_coin_timer_timeout():
-	$AnimatedSprite2D.frame = 0
-	$AnimatedSprite2D.play()
-
 
 func _on_area_entered(area: Area2D):
 	if area.is_in_group("obstacles"):

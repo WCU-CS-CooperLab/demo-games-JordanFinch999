@@ -1,0 +1,74 @@
+[gd_scene load_steps=16 format=3 uid="uid://toidpgwqwfk1"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_evk7y"]
+[ext_resource type="PackedScene" uid="uid://dkyx5g70uw2rm" path="res://coin.tscn" id="2_4qd03"]
+[ext_resource type="PackedScene" uid="uid://rwgsj2torjjw" path="res://player.tscn" id="3_5jccf"]
+[ext_resource type="PackedScene" uid="uid://ghw506n2s34l" path="res://powerup.tscn" id="3_5tiju"]
+[ext_resource type="PackedScene" uid="uid://cn3ipn22uvpc6" path="res://cactus.tscn" id="4_fxs1b"]
+[ext_resource type="PackedScene" uid="uid://bbjn8ytdjrwy1" path="res://hud.tscn" id="5_0jrrw"]
+[ext_resource type="PackedScene" uid="uid://dw5tm5qtfbl33" path="res://tumbleweed.tscn" id="5_ogk7l"]
+[ext_resource type="PackedScene" uid="uid://c5n23td37nomu" path="res://debuff.tscn" id="6_3ge88"]
+[ext_resource type="AudioStream" uid="uid://bjmrrk77pt0qq" path="res://assets/audio/Coin.wav" id="6_pgfxi"]
+[ext_resource type="AudioStream" uid="uid://bargk63phvyaf" path="res://assets/audio/Level.wav" id="7_8vuux"]
+[ext_resource type="Texture2D" uid="uid://dp7f7helu4rae" path="res://beach-sand-background-top-view-260nw-1648696168.png" id="7_ygotc"]
+[ext_resource type="AudioStream" uid="uid://d1k1a8gjpxu86" path="res://assets/pow/EndSound.wav" id="8_4r4jp"]
+[ext_resource type="PackedScene" uid="uid://ce80f52fftlmj" path="res://controls.tscn" id="12_voqr1"]
+[ext_resource type="AudioStream" uid="uid://bfh15sh13mxty" path="res://assets/audio/video-game-power-up-jam-fx-1-00-03.mp3" id="13_35ere"]
+[ext_resource type="AudioStream" uid="uid://ck8vb7tmyhf2j" path="res://assets/audio/arcade-game-negative-blip-om-fx-2-2-00-01.mp3" id="14_1qokm"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_evk7y")
+coin_scene = ExtResource("2_4qd03")
+powerup_scene = ExtResource("3_5tiju")
+cactus_scene = ExtResource("4_fxs1b")
+enemy_scene = ExtResource("5_ogk7l")
+debuff_scene = ExtResource("6_3ge88")
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_ygotc")
+
+[node name="HUD" parent="." instance=ExtResource("5_0jrrw")]
+
+[node name="Player" parent="." instance=ExtResource("3_5jccf")]
+
+[node name="GameTimer" type="Timer" parent="."]
+
+[node name="CoinSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_pgfxi")
+
+[node name="LevelSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_8vuux")
+
+[node name="EndSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_4r4jp")
+
+[node name="PowerupTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="PowerupSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_35ere")
+
+[node name="DebuffTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DebuffSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_1qokm")
+
+[node name="EnemyTimer" type="Timer" parent="."]
+
+[node name="Controls" parent="." instance=ExtResource("12_voqr1")]
+visible = false
+
+[connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]
+[connection signal="hurt" from="Player" to="." method="_on_player_hurt"]
+[connection signal="pickup" from="Player" to="." method="_on_player_pickup"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
+[connection signal="timeout" from="PowerupTimer" to="." method="_on_powerup_timer_timeout"]
+[connection signal="timeout" from="DebuffTimer" to="." method="_on_debuff_timer_timeout"]
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
+[connection signal="new" from="Controls" to="." method="_on_controls_new"]
