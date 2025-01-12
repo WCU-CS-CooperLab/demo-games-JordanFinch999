@@ -16,3 +16,8 @@ Ver 1.1 Coin Dash - https://wcu-cs-cooperlab.github.io/demo-games-JordanFinch999
 
 1. [Phase 1](https://wcu-cs-cooperlab.github.io/demo-games-JordanFinch999/CoinDash2.1/index.html)  
 2. [Phase 2](https://wcu-cs-cooperlab.github.io/demo-games-JordanFinch999/Project1Phase2Playable-rev2/index.html)
+
+# Project 2
+
+1. [Phase 1](https://wcu-cs-cooperlab.github.io/demo-games-JordanFinch999/Project2/Project2Phase1/index.html)  
+2. [Phase 2](https://wcu-cs-cooperlab.github.io/demo-games-JordanFinch999/Project2/Project2Phase2/index.html)
