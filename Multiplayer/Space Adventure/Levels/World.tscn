@@ -1,0 +1,104 @@
+[gd_scene load_steps=13 format=3 uid="uid://xjin6o4f8q0w"]
+
+[ext_resource type="Script" path="res://09.prototyping-space-adventure/Levels/World.gd" id="1_4v41m"]
+[ext_resource type="PackedScene" uid="uid://ctg86xypep676" path="res://09.prototyping-space-adventure/Recipes/Spawner/Spawner2D.tscn" id="2_not0y"]
+[ext_resource type="PackedScene" uid="uid://cv00gxfi4qouw" path="res://09.prototyping-space-adventure/Recipes/Spawner/RadialSpawner2d.tscn" id="2_yodqh"]
+[ext_resource type="PackedScene" uid="uid://ixmsjsthni07" path="res://09.prototyping-space-adventure/Objects/Asteroid/Asteroid.tscn" id="3_c1w0w"]
+[ext_resource type="PackedScene" uid="uid://b230ar4eqdp0p" path="res://09.prototyping-space-adventure/Actors/Player/Player2D.tscn" id="4_iadtc"]
+[ext_resource type="PackedScene" uid="uid://cv516c45jx5rx" path="res://09.prototyping-space-adventure/Quests/QuestPanel.tscn" id="5_tt3bh"]
+[ext_resource type="Texture2D" uid="uid://bg1omk7qhoi2j" path="res://09.prototyping-space-adventure/Levels/Star.svg" id="6_qxfj5"]
+[ext_resource type="PackedScene" uid="uid://bgqhmuqytc84e" path="res://09.prototyping-space-adventure/Authentication.tscn" id="8_dmrke"]
+
+[sub_resource type="Curve" id="Curve_xtohv"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3p4qt"]
+curve = SubResource("Curve_xtohv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_imv6t"]
+lifetime_randomness = 0.8
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(640, 360, 1)
+angle_min = -45.0
+angle_max = 45.0
+angular_velocity_min = 30.0
+angular_velocity_max = 80.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_curve = SubResource("CurveTexture_3p4qt")
+
+[sub_resource type="GDScript" id="GDScript_88vyb"]
+script/source = "extends Label
+
+
+func _ready():
+	visible = multiplayer.is_server()
+"
+
+[node name="Main" type="Node"]
+script = ExtResource("1_4v41m")
+
+[node name="Asteroids" parent="." instance=ExtResource("2_yodqh")]
+position = Vector2(640, 360)
+spawn_scene = ExtResource("3_c1w0w")
+
+[node name="Players" parent="." instance=ExtResource("2_not0y")]
+position = Vector2(220, 196)
+spawn_scene = ExtResource("4_iadtc")
+
+[node name="InterfaceCanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="QuestPanel" parent="InterfaceCanvasLayer" instance=ExtResource("5_tt3bh")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -380.0
+offset_top = -356.0
+offset_right = -32.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -2
+
+[node name="ColorRect" type="ColorRect" parent="BackgroundLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.196078, 0.160784, 0.278431, 1)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -1
+scroll_ignore_camera_zoom = true
+
+[node name="StarFieldParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(1280, 720)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxBackground/StarFieldParallaxLayer"]
+position = Vector2(640, 360)
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_imv6t")
+texture = ExtResource("6_qxfj5")
+lifetime = 8.0
+preprocess = 4.0
+
+[node name="Authentication" parent="." instance=ExtResource("8_dmrke")]
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "I'm server"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = SubResource("GDScript_88vyb")
